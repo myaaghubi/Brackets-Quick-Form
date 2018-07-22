@@ -11,46 +11,60 @@ define(function (require, exports, module)
   DocumentModule           = brackets.getModule("document/Document"),
   InMemoryFile             = brackets.getModule("document/InMemoryFile"),
   Editor                   = brackets.getModule("editor/Editor"),
-  QuickFormTemplate    = require("text!ui/QuickFormTemplate.html"),
+  QuickFormTemplate        = require("text!ui/QuickFormTemplate.html"),
   Mustache_                = brackets.getModule("thirdparty/mustache/mustache")
 
   var untitledhtml5index = 1;
   var untitledcssindex = 1;
   var untitledjsindex = 1;
+    
   
   function quickFormProvider()
   {
     try
     {
-      var $element = $(Mustache_.render(QuickFormTemplate, Strings));
+      var $elements = $(Mustache_.render(QuickFormTemplate, Strings));
 
-      $element.find(".qf-form").click(function () { quickForm("form"); });
-      $element.find(".qf-button").click(function () { quickForm("button"); });
-      $element.find(".qf-textfield").click(function () { quickForm("textfield"); });
-      $element.find(".qf-filefield").click(function () { quickForm("filefield"); });
-      $element.find(".qf-checkbox").click(function () { quickForm("checkbox"); });
-      $element.find(".qf-radiobutton").click(function () { quickForm("radiobutton"); });
-      $element.find(".qf-hiddenfield").click(function () { quickForm("hiddenfield"); });
-      $element.find(".qf-textarea").click(function () { quickForm("textarea"); });
-      $element.find(".qf-imagefield").click(function () { quickForm("imagefield"); });
-      $element.find(".qf-imagebutton").click(function () { quickForm("imagebutton"); });
-      $element.find(".qf-listmenu").click(function () { quickForm("listmenu"); });
-      $element.find(".qf-link").click(function () { quickForm("link"); });
+      $elements.find(".qf-form").click(function () { quickForm("form"); });
+      $elements.find(".qf-button").click(function () { quickForm("button"); });
+      $elements.find(".qf-textfield").click(function () { quickForm("textfield"); });
+      $elements.find(".qf-filefield").click(function () { quickForm("filefield"); });
+      $elements.find(".qf-checkbox").click(function () { quickForm("checkbox"); });
+      $elements.find(".qf-radiobutton").click(function () { quickForm("radiobutton"); });
+      $elements.find(".qf-hiddenfield").click(function () { quickForm("hiddenfield"); });
+      $elements.find(".qf-textarea").click(function () { quickForm("textarea"); });
+      $elements.find(".qf-imagefield").click(function () { quickForm("imagefield"); });
+      $elements.find(".qf-imagebutton").click(function () { quickForm("imagebutton"); });
+      $elements.find(".qf-listmenu").click(function () { quickForm("listmenu"); });
+      $elements.find(".qf-link").click(function () { quickForm("link"); });
       
-      $element.find(".qf-html5audio").click(function () { quickForm("html5audio"); });
-      $element.find(".qf-html5video").click(function () { quickForm("html5video"); });
-      $element.find(".qf-embedflash").click(function () { quickForm("embedflash"); });
+      $elements.find(".qf-html5audio").click(function () { quickForm("html5audio"); });
+      $elements.find(".qf-html5video").click(function () { quickForm("html5video"); });
+      $elements.find(".qf-embedflash").click(function () { quickForm("embedflash"); });
 
-      $element.find(".qf-html5file").click(function () { quickForm("html5file"); });
-      $element.find(".qf-cssfile").click(function () { quickForm("cssfile"); });
-      $element.find(".qf-jsfile").click(function () { quickForm("jsfile"); });
+      $elements.find(".qf-html5file").click(function () { quickForm("html5file"); });
+      $elements.find(".qf-cssfile").click(function () { quickForm("cssfile"); });
+      $elements.find(".qf-jsfile").click(function () { quickForm("jsfile"); });
 
-      $element.find(".qfnotify").click(function () { $element.find(".qfblock").toggleClass("qfblock-exp");
-        $element.find(".qfnotify").toggleClass("qfnotify-exp"); });
-      $element.find(".qf-unpin").click(function () {$element.find(".qfblock").toggleClass("qfblock-exp");
-       $element.find(".qf-unpin").toggleClass("qf-pin"); });
+      $elements.find(".qfnotify").click(function () { $elements.find(".qfblock").toggleClass("qfblock-exp");
+      $elements.find(".qfnotify").toggleClass("qfnotify-exp"); });
+      $elements.find(".qf-unpin").click(function () {
+          $elements.find(".qfblock").toggleClass("qfblock-exp");
+          $elements.find(".qf-unpin").toggleClass("qf-pin"); }
+      );
+        
+        
+    $(document.createElement('a'))
+        .attr('id', 'qf-main-icon')
+        .attr('href', '#')
+        .attr('title', 'Quick Form')
+        .on('click', function () {
+          $elements.find(".qfblock").toggleClass("qfblock-exp");
+          $elements.find(".qf-unpin").toggleClass("qf-pin");
+        })
+        .appendTo($('#main-toolbar .buttons'));
 
-      $($element).insertBefore("#editor-holder");
+      $($elements).insertBefore("#editor-holder");
     }
     catch(e)
     {
@@ -58,6 +72,7 @@ define(function (require, exports, module)
     }
   }
   var loadfunction = quickFormProvider();
+    
   function quickForm(_class)
   {
     try
