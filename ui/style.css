@@ -133,7 +133,7 @@
     width:auto;
     height: 30px;
 	box-shadow: none;
-    right:17px;
+    right:5px;
     opacity: 1;
     margin-top: 0;
     background-image: none;
@@ -141,7 +141,7 @@
 
 .qfblock:hover
 {
-    right: 17px;
+    right: 5px;
     height: 30px;
     width:inherit;
 	box-shadow: none;
